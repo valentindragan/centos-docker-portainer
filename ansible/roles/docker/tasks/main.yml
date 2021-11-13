@@ -1,0 +1,12 @@
+- name: Create a Docker group
+  group: name=docker state=present
+- name: Add the vagrant user to Docker group
+  user: name=vagrant groups=docker append=yes
+- name: Install Docker
+  yum: name=docker state=present
+- name: Enable and Start Docker Daemon
+  service: name=docker state=started enabled=yes
+- name: Run Portainer Container
+  shell: docker run -d --restart unless-stopped -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer
+- name: Run MailHog Container
+  shell: docker run -d -p 1025:1025 -p 8025:8025 mailhog/mailhog
