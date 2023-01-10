@@ -1,9 +1,17 @@
-- name: Create a Docker group
-  group: name=docker state=present
-- name: Add the vagrant user to Docker group
-  user: name=vagrant groups=docker append=yes
-- name: Install Docker
-  yum: name=docker state=present
+- name: Install yum Utils
+  yum:
+    name: "yum-utils"
+    state: "present"
+  become: true
+- name: Add Docker Centos Repo
+  shell: yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+  become: true
+- name: Install Docker CE
+  shell: yum install -y docker-ce
+  become: true
+- name: Install Docker Compose
+  command: yum -y install docker-compose
+  become: true
 - name: Enable and Start Docker Daemon
   service: name=docker state=started enabled=yes
 - name: Run Portainer Container

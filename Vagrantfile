@@ -1,8 +1,8 @@
 # created by Valentin Dragan, Nov 2021
 ### configuration parameters ###
-VM_NAME = "CentosDocker"
+VM_NAME = "CDP1"
 VM_OS = "geerlingguy/centos7"
-VM_IP = "192.168.55.11"
+VM_IP = "192.168.55.31"
 VM_AUTOMATIC_UPDATES = true
 VM_RAM = "2048"
 VM_CPU = "1"
@@ -50,7 +50,7 @@ Vagrant.configure(2) do |config|
     #end
 	
 	
-	# Run Ansible files
+	#Run Ansible files
     config.vm.provision "ansible_local" do |ansible|
         ansible.verbose = "vv"
         ansible.become = true # execute as root
