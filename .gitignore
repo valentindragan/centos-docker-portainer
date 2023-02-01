@@ -1,1 +1,4 @@
 /.vagrant/
+!/www/.gitkeep
+/www/
+.idea
